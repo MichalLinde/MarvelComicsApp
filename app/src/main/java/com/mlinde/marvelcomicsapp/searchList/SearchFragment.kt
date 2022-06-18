@@ -1,5 +1,6 @@
 package com.mlinde.marvelcomicsapp.searchList
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +10,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mlinde.marvelcomicsapp.comicsList.ComicsListAdapter
+import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentSearchBinding
+import com.mlinde.marvelcomicsapp.details.DetailsActivity
 
 
 class SearchFragment : Fragment() {
@@ -35,11 +38,9 @@ class SearchFragment : Fragment() {
         searchButton.setOnClickListener {
             val searchText = binding.searchInput.text.toString()
             if (searchText != null){
-                //binding.notFoundLayout.isVisible = false
                 binding.infoLayout.isVisible = false
                 setUpComponents(searchText)
                 setUpFoundObserver()
-                //binding.searchRV.isVisible = true
             }
         }
     }
@@ -63,7 +64,9 @@ class SearchFragment : Fragment() {
     private fun setUpAdapter(it: ComicDataWrapper){
         binding.searchRV.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = ComicsListAdapter(it.data.results)
+            adapter = ComicsListAdapter(it.data.results){
+                onClick(it)
+            }
         }
         binding.searchRV.adapter!!.notifyDataSetChanged()
     }
@@ -80,6 +83,11 @@ class SearchFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         setUpObserver()
         viewModel.searchComics(searchText)
+    }
+    private fun onClick(comicBook: ComicBook){
+        val intent = Intent(requireContext(), DetailsActivity::class.java)
+        intent.putExtra("comicBook", comicBook)
+        startActivity(intent)
     }
 
 

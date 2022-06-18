@@ -9,7 +9,9 @@ import com.mlinde.marvelcomicsapp.GlideApp
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.databinding.ComicsListElementBinding
 
-class ComicsListAdapter(private val comics: List<ComicBook>)
+class ComicsListAdapter(
+    private val comics: List<ComicBook>,
+    private val onClick: (comicBook: ComicBook) -> Unit)
     : RecyclerView.Adapter<ComicsListAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(
@@ -21,7 +23,7 @@ class ComicsListAdapter(private val comics: List<ComicBook>)
     }
 
     override fun onBindViewHolder(holder: ComicsListAdapter.ViewHolder, position: Int) {
-        holder.bind(comics[position])
+        holder.bind(comics[position], onClick)
     }
 
     override fun getItemCount(): Int {
@@ -31,7 +33,7 @@ class ComicsListAdapter(private val comics: List<ComicBook>)
     class ViewHolder(private val binding: ComicsListElementBinding)
         : RecyclerView.ViewHolder(binding.root){
 
-            fun bind(comicBook: ComicBook){
+            fun bind(comicBook: ComicBook, onClick: (comicBook: ComicBook) -> Unit) = with(binding){
 
                 GlideApp.with(itemView)
                     .load(comicBook.thumbnail.getPath())
@@ -43,13 +45,28 @@ class ComicsListAdapter(private val comics: List<ComicBook>)
                     binding.comicBookDescription.text = "Description not given."
 
                 } else{
-                    binding.comicBookDescription.text = comicBook.description
+                    if (comicBook.description.length > 80)
+                        binding.comicBookDescription.text = comicBook.description.substring(0, 80)+"..."
+                        //binding.comicBookDescription.text = "Bardzo długi opis"
                 }
-                for (creator in comicBook.creators.items){
-                    if (creator.role == "writer"){
-                        binding.comicBookAuthor.text = "Written by ${comicBook.creators.items[0].name}"
-                        break
+                if (comicBook.creators.items.isEmpty()){
+                    binding.comicBookAuthor.text = "Author not given."
+                } else{
+                    var foundWriter = false
+                    for (creator in comicBook.creators.items){
+                        if (creator.role == "writer"){
+                            binding.comicBookAuthor.text = "Written by ${creator.name}"
+                            foundWriter = true
+                            break
+                        }
                     }
+                    if (!foundWriter){
+                        binding.comicBookAuthor.text = "Created by ${comicBook.creators.items[0].name}"
+                    }
+                }
+
+                itemView.setOnClickListener {
+                    onClick(comicBook)
                 }
 
             }

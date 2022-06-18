@@ -16,6 +16,7 @@ data class ComicBook(
     val images: List<Image>,
     val creators: CreatorList,
     val resourceURI: String,
-    val pageCount: Int
+    val pageCount: Int,
+    val urls: List<Url>
 ) : Parcelable
 
