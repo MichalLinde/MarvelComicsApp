@@ -22,7 +22,7 @@ App is based on MVVM pattern and is dependent on LiveData
 - Glide to load images from url to ImageView
 
 ## Screenshots
-![image](https://user-images.githubusercontent.com/93143413/174459047-f869d9e1-ce1f-4c1a-b05f-a0585c2456e3.png)
+![image](https://user-images.githubusercontent.com/93143413/174459047-f869d9e1-ce1f-4c1a-b05f-a0585c2456e3.png = 120x300)
 ![image](https://user-images.githubusercontent.com/93143413/174459059-bb485f3f-3204-402e-a00b-a7f8e1b3a69d.png)
 ![image](https://user-images.githubusercontent.com/93143413/174459090-52b6e71d-09ae-45b8-961c-fb144ac5225e.png)
 ![image](https://user-images.githubusercontent.com/93143413/174459101-90e961b2-9958-401e-a044-5003f53bf4a7.png)
