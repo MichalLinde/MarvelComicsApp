@@ -20,7 +20,7 @@ class SearchViewModel() : ViewModel() {
             when(val response = business.searchComics(search)){
                 is ApiRensponse.Success ->{
                     comicsLiveData.postValue(response.data as ComicDataWrapper)
-                    if (response.data.comicDataContainer.results.isEmpty()){
+                    if (response.data.data.results.isEmpty()){
                         foudnData.postValue(false)
                     } else{
                         foudnData.postValue(true)

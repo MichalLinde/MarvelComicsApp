@@ -63,7 +63,7 @@ class SearchFragment : Fragment() {
     private fun setUpAdapter(it: ComicDataWrapper){
         binding.searchRV.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = ComicsListAdapter(it.comicDataContainer.results)
+            adapter = ComicsListAdapter(it.data.results)
         }
         binding.searchRV.adapter!!.notifyDataSetChanged()
     }

@@ -9,7 +9,7 @@ data class ComicDataWrapper(
     val attributionText: String,
     val code: Int,
     val copyright: String,
-    val comicDataContainer: ComicDataContainer,
+    val data: ComicDataContainer,
     val etag: String,
     val status: String
 ) : Parcelable

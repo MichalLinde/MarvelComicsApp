@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 data class ComicBook(
     val id: Int,
     val title: String,
-    val description: String,
+    val description: String?,
     val thumbnail: Thumbnail,
     val images: List<Image>,
     val creators: CreatorList,

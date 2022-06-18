@@ -11,7 +11,7 @@ import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentComicsListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class ComicsListFragment : Fragment() {
 
 
@@ -40,7 +40,7 @@ class ComicsListFragment : Fragment() {
     private fun setUpAdapter(it: ComicDataWrapper){
         binding.comicsRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = ComicsListAdapter(it.comicDataContainer.results)
+            adapter = ComicsListAdapter(it.data.results)
         }
     }
 

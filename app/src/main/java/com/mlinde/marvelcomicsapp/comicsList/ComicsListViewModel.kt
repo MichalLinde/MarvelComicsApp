@@ -10,8 +10,7 @@ import kotlinx.coroutines.launch
 
 class ComicsListViewModel : ViewModel() {
 
-    private val search: String? = null
-    private val business = Comics(search)
+    private val business = Comics(null)
     var comicsLiveData: MutableLiveData<ComicDataWrapper> = MutableLiveData()
     var messageLiveData: MutableLiveData<String> = MutableLiveData()
 
