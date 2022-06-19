@@ -1,10 +1,8 @@
 package com.mlinde.marvelcomicsapp.comicsList
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mlinde.marvelcomicsapp.GlideApp
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.databinding.ComicsListElementBinding
@@ -47,7 +45,6 @@ class ComicsListAdapter(
                 } else{
                     if (comicBook.description.length > 80)
                         binding.comicBookDescription.text = comicBook.description.substring(0, 80)+"..."
-                        //binding.comicBookDescription.text = "Bardzo długi opis"
                 }
                 if (comicBook.creators.items.isEmpty()){
                     binding.comicBookAuthor.text = "Author not given."

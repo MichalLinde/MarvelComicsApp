@@ -2,6 +2,8 @@ package com.mlinde.marvelcomicsapp.searchList
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +22,6 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
-    private var clicked: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +34,25 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val searchButton  = binding.searchButton
+        val searchBar = binding.searchInput
 
-        searchButton.setOnClickListener {
-            val searchText = binding.searchInput.text.toString()
-            if (searchText != null){
-                binding.infoLayout.isVisible = false
-                setUpComponents(searchText)
-                setUpFoundObserver()
+        searchBar.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
-        }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = binding.searchInput.text.toString()
+                if (searchText != null){
+                    binding.infoLayout.isVisible = false
+                    setUpComponents(searchText)
+                    setUpFoundObserver()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+        })
     }
 
     private fun setUpFoundObserver(){

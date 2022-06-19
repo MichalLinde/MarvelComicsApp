@@ -12,7 +12,6 @@ import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentComicsListBinding
 import com.mlinde.marvelcomicsapp.details.DetailsActivity
-import dagger.hilt.android.AndroidEntryPoint
 
 
 class ComicsListFragment : Fragment() {

@@ -3,18 +3,13 @@ package com.mlinde.marvelcomicsapp.details
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.mlinde.marvelcomicsapp.GlideApp
-import com.mlinde.marvelcomicsapp.R
 import com.mlinde.marvelcomicsapp.data.ComicBook
-import com.mlinde.marvelcomicsapp.databinding.BottomSheetLayoutBinding
 import com.mlinde.marvelcomicsapp.databinding.FragmentDetailsBinding
 
 private const val ARG_PARAM1 = "comicBook"

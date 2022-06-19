@@ -11,7 +11,6 @@ class Constants {
         val timeStamp = Timestamp(System.currentTimeMillis()).toString()
         const val API_KEY = "8e6eaff2babc82d749bb7e1f5586a85a"
         const val PRIVATE_KEY = "6ca43e1e43e8696e0d09bc35ccb20593c6ffc715"
-        const val limit = "20"
         fun hash(): String {
             val input = "$timeStamp$PRIVATE_KEY$API_KEY"
             val md = MessageDigest.getInstance("MD5")
