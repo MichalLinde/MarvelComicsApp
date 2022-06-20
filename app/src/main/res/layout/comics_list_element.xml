@@ -56,6 +56,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:maxLines="4"
+            android:ellipsize="end"
             android:text="The Illuminati, Marvel’s most powerful and secretive team, must reassemble to stand against interdimensional incursions!"
             app:layout_constraintTop_toBottomOf="@id/comicBookAuthor"
             app:layout_constraintLeft_toRightOf="@id/comicBookCover"

@@ -43,8 +43,7 @@ class ComicsListAdapter(
                     binding.comicBookDescription.text = "Description not given."
 
                 } else{
-                    if (comicBook.description.length > 80)
-                        binding.comicBookDescription.text = comicBook.description.substring(0, 80)+"..."
+                    binding.comicBookDescription.text = comicBook.description
                 }
                 if (comicBook.creators.items.isEmpty()){
                     binding.comicBookAuthor.text = "Author not given."

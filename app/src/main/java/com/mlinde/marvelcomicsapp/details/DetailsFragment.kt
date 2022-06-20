@@ -3,6 +3,7 @@ package com.mlinde.marvelcomicsapp.details
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +52,7 @@ class DetailsFragment : Fragment() {
                 binding.bottomSheetDescription.text = "Sorry, no description was given :("
             } else{
                 binding.bottomSheetDescription.text = comicBook.description
+                //binding.bottomSheetDescription.text = Html.fromHtml(comicBook.description, Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV)
             }
         }
 
