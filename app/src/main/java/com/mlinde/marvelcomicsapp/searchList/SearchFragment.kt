@@ -9,24 +9,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mlinde.marvelcomicsapp.R
 import com.mlinde.marvelcomicsapp.comicsList.ComicsListAdapter
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentSearchBinding
 import com.mlinde.marvelcomicsapp.details.DetailsActivity
+import com.mlinde.marvelcomicsapp.details.DetailsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
-    private lateinit var viewModel: SearchViewModel
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -90,7 +94,6 @@ class SearchFragment : Fragment() {
     }
 
     private fun setUpComponents(searchText: String){
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         setUpObserver()
         viewModel.searchComics(searchText)
     }
