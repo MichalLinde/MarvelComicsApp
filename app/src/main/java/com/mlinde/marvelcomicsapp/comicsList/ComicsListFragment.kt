@@ -6,26 +6,29 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentComicsListBinding
 import com.mlinde.marvelcomicsapp.details.DetailsActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class ComicsListFragment : Fragment() {
 
 
     private lateinit var binding: FragmentComicsListBinding
-    private lateinit var viewModel: ComicsListViewModel
+    private val viewModel: ComicsListViewModel by viewModels()
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentComicsListBinding.inflate(inflater, container, false)
         return binding.root
@@ -57,7 +60,6 @@ class ComicsListFragment : Fragment() {
     }
 
     private fun setUpComponents(){
-        viewModel = ViewModelProvider(this).get(ComicsListViewModel::class.java)
         setUpObserver()
         viewModel.getComics()
     }

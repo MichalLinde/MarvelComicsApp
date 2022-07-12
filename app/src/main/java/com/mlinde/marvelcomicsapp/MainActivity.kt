@@ -7,7 +7,9 @@ import com.google.android.material.tabs.TabLayout
 import com.mlinde.marvelcomicsapp.comicsList.ComicsListFragment
 import com.mlinde.marvelcomicsapp.databinding.ActivityMainBinding
 import com.mlinde.marvelcomicsapp.searchList.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

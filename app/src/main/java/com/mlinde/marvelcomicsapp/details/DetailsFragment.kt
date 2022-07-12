@@ -12,9 +12,11 @@ import android.widget.Toast
 import com.mlinde.marvelcomicsapp.GlideApp
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.databinding.FragmentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 private const val ARG_PARAM1 = "comicBook"
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
 
@@ -24,7 +26,7 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
         comicBook = arguments?.getParcelable<ComicBook>(ARG_PARAM1) as ComicBook
         return binding.root
@@ -41,7 +43,7 @@ class DetailsFragment : Fragment() {
             if (comicBook.creators.items.isEmpty()){
                 binding.bottomSheetAuthor.text = "No author was given :("
             } else{
-                var authors: String = ""
+                var authors = ""
                 for (creator in comicBook.creators.items){
                     authors += " ${creator.name},"
                 }
