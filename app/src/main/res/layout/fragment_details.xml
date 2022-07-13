@@ -25,17 +25,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/bottomSheetLayout"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="120dp"
+            app:behavior_peekHeight="@dimen/bottom_sheet_peek"
             android:background="@drawable/bottom_sheet_shape"
-            android:paddingBottom="50dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
+            android:paddingBottom="@dimen/bottom_sheet_padding_vert"
+            android:paddingLeft="@dimen/bottom_sheet_padding_hor"
+            android:paddingRight="@dimen/bottom_sheet_padding_hor"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <ImageView
                 android:id="@+id/bottomSheetIcon"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/bottom_sheet_icon_width"
+                android:layout_height="@dimen/bottom_sheet_icon_height"
                 android:src="@drawable/ic_remove_24"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -49,7 +49,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bottomSheetIcon"
                 android:text="@string/default_title"
-                android:textSize="24sp"
+                android:textSize="@dimen/title_size"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -61,18 +61,18 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bottomSheetTitle"
                 android:text="@string/default_author"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:textSize="@dimen/author_size"
+                android:layout_marginTop="@dimen/bottom_sheet_author_margin" />
 
             <ScrollView
                 android:id="@+id/bottomSheetScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/bottom_sheet_desc_scrollview_height"
                 app:layout_constraintTop_toBottomOf="@+id/bottomSheetAuthor"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/findOutMoreButton"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/bottom_sheet_desc_margin">
 
                 <TextView
                     android:id="@+id/bottomSheetDescription"
@@ -82,8 +82,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/bottomSheetAuthor"
-                    android:textSize="18sp"
-                    android:paddingBottom="10dp"
+                    android:textSize="@dimen/desc_size"
+                    android:paddingBottom="@dimen/bottom_sheet_desc_margin"
                     android:textColor="@color/black"
                     android:text="@string/default_desc" />
 
@@ -93,7 +93,7 @@
                 android:id="@+id/findOutMoreButton"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="@dimen/more_button_top_margin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bottomSheetScrollView"
