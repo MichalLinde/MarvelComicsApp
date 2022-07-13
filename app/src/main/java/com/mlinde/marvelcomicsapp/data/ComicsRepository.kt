@@ -1,10 +1,8 @@
 package com.mlinde.marvelcomicsapp.data
 
-import com.mlinde.marvelcomicsapp.api.ApiRensponse
 import com.mlinde.marvelcomicsapp.api.ApiService
 import retrofit2.HttpException
 import retrofit2.Response
-import kotlin.Exception
 
 class ComicsRepository(private val apiService: ApiService) {
 

@@ -1,20 +1,20 @@
 package com.mlinde.marvelcomicsapp.comicsList
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mlinde.marvelcomicsapp.R
 import com.mlinde.marvelcomicsapp.api.ApiRensponse
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentComicsListBinding
-import com.mlinde.marvelcomicsapp.details.DetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -70,8 +70,7 @@ class ComicsListFragment : Fragment() {
     }
 
     private fun onClick(comicBook: ComicBook){
-        val intent = Intent(requireContext(), DetailsActivity::class.java)
-        intent.putExtra("comicBook", comicBook)
-        startActivity(intent)
+        val bundle = bundleOf("comicBook" to comicBook)
+        findNavController().navigate(R.id.action_comicsListFragment_to_detailsFragment, bundle)
     }
 }

@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mlinde.marvelcomicsapp.R
 import com.mlinde.marvelcomicsapp.api.ApiRensponse
@@ -103,9 +105,8 @@ class SearchFragment : Fragment() {
         viewModel.searchComics(searchText)
     }
     private fun onClick(comicBook: ComicBook){
-        val intent = Intent(requireContext(), DetailsActivity::class.java)
-        intent.putExtra("comicBook", comicBook)
-        startActivity(intent)
+        val bundle = bundleOf("comicBook" to comicBook)
+        findNavController().navigate(R.id.action_searchFragment_to_detailsFragment, bundle)
     }
 
 

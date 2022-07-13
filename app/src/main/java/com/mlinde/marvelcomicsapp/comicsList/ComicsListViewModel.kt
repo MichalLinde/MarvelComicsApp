@@ -25,7 +25,6 @@ class ComicsListViewModel @Inject constructor(private val repository: ComicsRepo
                 }
                 .onFailure {
                     comicsLiveData.postValue(ApiRensponse.Error(it))
-//                    Log.e("Error", "Error", error)
                 }
         }
     }
