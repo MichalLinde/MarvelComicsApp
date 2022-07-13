@@ -1,5 +1,6 @@
 package com.mlinde.marvelcomicsapp.comicsList
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,19 +15,14 @@ import javax.inject.Inject
 class ComicsListViewModel @Inject constructor(private val repository: ComicsRepository): ViewModel() {
 
     var comicsLiveData: MutableLiveData<ComicDataWrapper> = MutableLiveData()
-    var messageLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun getComics(){
         viewModelScope.launch {
-            when(val response = repository.getComics()){
-                is ApiRensponse.Success ->{
-                    comicsLiveData.postValue(response.data as ComicDataWrapper)
+            runCatching { repository.getComics() }
+                .onSuccess { comicsLiveData.postValue(it.body()) }
+                .onFailure { error: Throwable ->
+                        Log.e("Error", "Error", error)
                 }
-                is ApiRensponse.Error -> {
-                    messageLiveData.postValue(response.message)
-                }
-            }
         }
     }
-
 }

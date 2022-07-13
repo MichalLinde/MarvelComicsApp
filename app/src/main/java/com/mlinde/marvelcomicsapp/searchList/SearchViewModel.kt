@@ -1,5 +1,6 @@
 package com.mlinde.marvelcomicsapp.searchList
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,25 +15,23 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val repository: ComicsRepository) : ViewModel() {
 
     var comicsLiveData: MutableLiveData<ComicDataWrapper?> = MutableLiveData()
-    var messageLiveData: MutableLiveData<String> = MutableLiveData()
     var foudnData = MutableLiveData<Boolean>(true)
 
+
     fun searchComics(search: String){
-        //val business = Comics(search)
         viewModelScope.launch {
-            when(val response = repository.searchComics(search)){
-                is ApiRensponse.Success ->{
-                    comicsLiveData.postValue(response.data as ComicDataWrapper)
-                    if (response.data.data.results.isEmpty()){
+            runCatching { repository.searchComics(search) }
+                .onSuccess {
+                    comicsLiveData.postValue(it.body())
+                    if (it.body()?.data?.results?.isEmpty() == true){
                         foudnData.postValue(false)
                     } else{
                         foudnData.postValue(true)
                     }
                 }
-                is ApiRensponse.Error -> {
-                    messageLiveData.postValue(response.message)
+                .onFailure { error: Throwable ->
+                    Log.e("Error", "Error", error)
                 }
-            }
         }
     }
 }
