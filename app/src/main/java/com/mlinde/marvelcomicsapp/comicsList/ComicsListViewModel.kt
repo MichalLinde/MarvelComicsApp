@@ -14,14 +14,18 @@ import javax.inject.Inject
 @HiltViewModel
 class ComicsListViewModel @Inject constructor(private val repository: ComicsRepository): ViewModel() {
 
-    var comicsLiveData: MutableLiveData<ComicDataWrapper> = MutableLiveData()
+    var comicsLiveData = MutableLiveData<ApiRensponse<ComicDataWrapper>>()
 
     fun getComics(){
         viewModelScope.launch {
+
             runCatching { repository.getComics() }
-                .onSuccess { comicsLiveData.postValue(it.body()) }
-                .onFailure { error: Throwable ->
-                        Log.e("Error", "Error", error)
+                .onSuccess {
+                    comicsLiveData.postValue(ApiRensponse.Success(it.body()))
+                }
+                .onFailure {
+                    comicsLiveData.postValue(ApiRensponse.Error(it))
+//                    Log.e("Error", "Error", error)
                 }
         }
     }

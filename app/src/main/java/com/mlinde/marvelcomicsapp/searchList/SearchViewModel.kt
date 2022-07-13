@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: ComicsRepository) : ViewModel() {
 
-    var comicsLiveData: MutableLiveData<ComicDataWrapper?> = MutableLiveData()
+    var comicsLiveData = MutableLiveData<ApiRensponse<ComicDataWrapper>>()
     var foudnData = MutableLiveData<Boolean>(true)
 
 
@@ -22,7 +22,7 @@ class SearchViewModel @Inject constructor(private val repository: ComicsReposito
         viewModelScope.launch {
             runCatching { repository.searchComics(search) }
                 .onSuccess {
-                    comicsLiveData.postValue(it.body())
+                    comicsLiveData.postValue(ApiRensponse.Success(it.body()))
                     if (it.body()?.data?.results?.isEmpty() == true){
                         foudnData.postValue(false)
                     } else{

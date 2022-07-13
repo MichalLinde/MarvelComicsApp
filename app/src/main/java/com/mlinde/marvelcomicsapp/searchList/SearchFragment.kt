@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mlinde.marvelcomicsapp.R
+import com.mlinde.marvelcomicsapp.api.ApiRensponse
 import com.mlinde.marvelcomicsapp.comicsList.ComicsListAdapter
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
@@ -87,8 +89,11 @@ class SearchFragment : Fragment() {
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
-            it?.let {
-                setUpAdapter(it)
+            if (it is ApiRensponse.Success){
+                it.data?.let { it1 -> setUpAdapter(it1) }
+            }
+            else if (it is ApiRensponse.Error){
+                Log.e("Error", "setUpObserver: ", it.message)
             }
         }
     }
