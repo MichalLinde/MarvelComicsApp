@@ -3,13 +3,11 @@ package com.mlinde.marvelcomicsapp.details
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.mlinde.marvelcomicsapp.GlideApp
 import com.mlinde.marvelcomicsapp.data.ComicBook
@@ -43,19 +41,19 @@ class DetailsFragment : Fragment() {
         binding.apply {
 
             if (comicBook.creators.items.isEmpty()){
-                binding.bottomSheetAuthor.text = "No author was given :("
+                bottomSheetAuthor.text = "No author was given :("
             } else{
                 var authors = ""
                 for (creator in comicBook.creators.items){
                     authors += " ${creator.name},"
                 }
-                binding.bottomSheetAuthor.text = authors.dropLast(1)
+                bottomSheetAuthor.text = authors.dropLast(1)
             }
-            binding.bottomSheetTitle.text = comicBook.title
+            bottomSheetTitle.text = comicBook.title
             if (comicBook.description == null || comicBook.description == ""){
-                binding.bottomSheetDescription.text = "Sorry, no description was given :("
+                bottomSheetDescription.text = "Sorry, no description was given :("
             } else{
-                binding.bottomSheetDescription.text = comicBook.description
+                bottomSheetDescription.text = comicBook.description
             }
         }
 

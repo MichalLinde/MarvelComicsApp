@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mlinde.marvelcomicsapp.R
-import com.mlinde.marvelcomicsapp.api.ApiRensponse
+import com.mlinde.marvelcomicsapp.api.ApiResponse
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentComicsListBinding
@@ -55,12 +53,12 @@ class ComicsListFragment : Fragment() {
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
-            if (it is ApiRensponse.Success){
+            if (it is ApiResponse.Success){
                 it.data?.let { comicModel ->
                     setUpAdapter(comicModel)
                 }
             }
-            else if (it is ApiRensponse.Error){
+            else if (it is ApiResponse.Error){
                 Log.e("Error", "setUpObserver: ", it.message)
             }
         }
@@ -72,7 +70,6 @@ class ComicsListFragment : Fragment() {
     }
 
     private fun onClick(comicBook: ComicBook){
-        val bundle = bundleOf("comicBook" to comicBook)
-        findNavController().navigate(R.id.action_comicsListFragment_to_detailsFragment, bundle)
+        findNavController().navigate(ComicsListFragmentDirections.actionComicsListFragmentToDetailsFragment(comicBook))
     }
 }
