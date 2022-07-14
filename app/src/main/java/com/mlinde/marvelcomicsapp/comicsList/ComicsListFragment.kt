@@ -40,6 +40,7 @@ class ComicsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentComicsListBinding.bind(view)
+        val newBinding = binding
 
         setUpComponents()
     }
@@ -47,16 +48,16 @@ class ComicsListFragment : Fragment() {
     private fun setUpAdapter(it: ComicDataWrapper){
         binding.comicsRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = ComicsListAdapter(it.data.results){
-                onClick(it)
-            }
+            adapter = ComicsListAdapter(it.data.results) {                onClick(it)            }
         }
     }
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
             if (it is ApiRensponse.Success){
-                it.data?.let { it1 -> setUpAdapter(it1) }
+                it.data?.let { comicModel -> 
+                    setUpAdapter(comicModel) 
+                }
             }
             else if (it is ApiRensponse.Error){
                 Log.e("Error", "setUpObserver: ", it.message)
@@ -70,8 +71,8 @@ class ComicsListFragment : Fragment() {
     }
 
     private fun onClick(comicBook: ComicBook){
-        val intent = Intent(requireContext(), DetailsActivity::class.java)
-        intent.putExtra("comicBook", comicBook)
-        startActivity(intent)
+        startActivity(Intent(requireContext(), DetailsActivity::class.java).apply {
+         putExtra("comicBook", comicBook)
+        })
     }
 }
