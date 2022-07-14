@@ -9,4 +9,7 @@
     <string name="search">Search for a comic book</string>
     <string name="start_search">Start typing to find a particular comics.</string>
     <string name="search_no_result">Sorry, nothing was found.</string>
+    <string name="comics_list_label">Marvel Comics</string>
+    <string name="search_fragment_label"> </string>
+    <string name="details_fragment_label">Details</string>
 </resources>
