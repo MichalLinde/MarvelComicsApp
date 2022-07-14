@@ -56,7 +56,9 @@ class ComicsListFragment : Fragment() {
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
             if (it is ApiRensponse.Success){
-                it.data?.let { it1 -> setUpAdapter(it1) }
+                it.data?.let { comicModel ->
+                    setUpAdapter(comicModel)
+                }
             }
             else if (it is ApiRensponse.Error){
                 Log.e("Error", "setUpObserver: ", it.message)
