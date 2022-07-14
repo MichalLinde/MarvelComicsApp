@@ -1,6 +1,5 @@
 package com.mlinde.marvelcomicsapp.searchList
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,16 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mlinde.marvelcomicsapp.R
-import com.mlinde.marvelcomicsapp.api.ApiRensponse
+import com.mlinde.marvelcomicsapp.api.ApiResponse
 import com.mlinde.marvelcomicsapp.comicsList.ComicsListAdapter
 import com.mlinde.marvelcomicsapp.data.ComicBook
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.databinding.FragmentSearchBinding
-import com.mlinde.marvelcomicsapp.details.DetailsActivity
-import com.mlinde.marvelcomicsapp.details.DetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -89,10 +85,10 @@ class SearchFragment : Fragment() {
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
-            if (it is ApiRensponse.Success){
+            if (it is ApiResponse.Success){
                 it.data?.let { it1 -> setUpAdapter(it1) }
             }
-            else if (it is ApiRensponse.Error){
+            else if (it is ApiResponse.Error){
                 Log.e("Error", "setUpObserver: ", it.message)
             }
         }
@@ -103,9 +99,7 @@ class SearchFragment : Fragment() {
         viewModel.searchComics(searchText)
     }
     private fun onClick(comicBook: ComicBook){
-        val intent = Intent(requireContext(), DetailsActivity::class.java)
-        intent.putExtra("comicBook", comicBook)
-        startActivity(intent)
+        findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToDetailsFragment(comicBook))
     }
 
 

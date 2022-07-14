@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/comicsListFragment"
         android:name="com.mlinde.marvelcomicsapp.comicsList.ComicsListFragment"
-        android:label="fragment_comics_list"
+        android:label="@string/comics_list_label"
         tools:layout="@layout/fragment_comics_list" >
         <action
             android:id="@+id/action_comicsListFragment_to_detailsFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.mlinde.marvelcomicsapp.searchList.SearchFragment"
-        android:label="fragment_search"
+        android:label="@string/search_fragment_label"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_detailsFragment"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.mlinde.marvelcomicsapp.details.DetailsFragment"
-        android:label="fragment_details"
+        android:label="@string/details_fragment_label"
         tools:layout="@layout/fragment_details">
         <argument
             android:name="comicBook"

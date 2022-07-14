@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mlinde.marvelcomicsapp.api.ApiRensponse
+import com.mlinde.marvelcomicsapp.api.ApiResponse
 import com.mlinde.marvelcomicsapp.data.ComicDataWrapper
 import com.mlinde.marvelcomicsapp.data.ComicsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: ComicsRepository) : ViewModel() {
 
-    var comicsLiveData = MutableLiveData<ApiRensponse<ComicDataWrapper>>()
+    var comicsLiveData = MutableLiveData<ApiResponse<ComicDataWrapper>>()
     var foudnData = MutableLiveData<Boolean>(true)
 
 
@@ -22,7 +22,7 @@ class SearchViewModel @Inject constructor(private val repository: ComicsReposito
         viewModelScope.launch {
             runCatching { repository.searchComics(search) }
                 .onSuccess {
-                    comicsLiveData.postValue(ApiRensponse.Success(it.body()))
+                    comicsLiveData.postValue(ApiResponse.Success(it.body()))
                     if (it.body()?.data?.results?.isEmpty() == true){
                         foudnData.postValue(false)
                     } else{
