@@ -58,7 +58,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setUpFoundObserver(){
-        viewModel.foudnData.observe(viewLifecycleOwner){
+        viewModel.foundData.observe(viewLifecycleOwner){
             if (it == false){
                 binding.apply {
                     searchRV.isVisible = false
@@ -85,11 +85,14 @@ class SearchFragment : Fragment() {
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
-            if (it is ApiResponse.Success){
-                it.data?.let { it1 -> setUpAdapter(it1) }
-            }
-            else if (it is ApiResponse.Error){
-                Log.e("Error", "setUpObserver: ", it.message)
+//            if (it is ApiResponse.Success){
+//                it.data?.let { it1 -> setUpAdapter(it1) }
+//            }
+//            else if (it is ApiResponse.Error){
+//                Log.e("Error", "setUpObserver: ", it.message)
+//            }
+            it?.let {
+                setUpAdapter(it)
             }
         }
     }

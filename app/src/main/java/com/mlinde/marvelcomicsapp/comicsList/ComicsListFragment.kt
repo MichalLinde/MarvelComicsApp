@@ -53,13 +53,16 @@ class ComicsListFragment : Fragment() {
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
-            if (it is ApiResponse.Success){
-                it.data?.let { comicModel ->
-                    setUpAdapter(comicModel)
-                }
-            }
-            else if (it is ApiResponse.Error){
-                Log.e("Error", "setUpObserver: ", it.message)
+//            if (it is ApiResponse.Success){
+//                it.data?.let { comicModel ->
+//                    setUpAdapter(comicModel)
+//                }
+//            }
+//            else if (it is ApiResponse.Error){
+//                Log.e("Error", "setUpObserver: ", it.message)
+//            }
+            it?.let {
+                setUpAdapter(it)
             }
         }
     }

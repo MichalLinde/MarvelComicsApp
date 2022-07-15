@@ -4,21 +4,27 @@ import com.mlinde.marvelcomicsapp.api.ApiService
 import retrofit2.HttpException
 import retrofit2.Response
 
-class ComicsRepository(private val apiService: ApiService) {
+class ComicsRepository(private val apiService: ApiService): RepositoryInterface {
 
-    suspend fun getComics(): Response<ComicDataWrapper> {
+    override suspend fun getComics(): ComicDataWrapper? {
         val response = apiService.comics()
         if (!response.isSuccessful){
             throw HttpException(response)
         }
-        return response
+        return response.body()
     }
 
-    suspend fun searchComics(search: String): Response<ComicDataWrapper>{
+    override suspend fun searchComics(search: String): ComicDataWrapper?{
         val response = apiService.searchComics(search)
         if (!response.isSuccessful){
             throw HttpException(response)
         }
-        return response
+        return response.body()
     }
+}
+
+interface RepositoryInterface{
+
+    suspend fun getComics() : ComicDataWrapper?
+    suspend fun searchComics(search: String): ComicDataWrapper?
 }

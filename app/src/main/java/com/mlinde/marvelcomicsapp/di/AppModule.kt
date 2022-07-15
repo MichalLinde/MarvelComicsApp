@@ -3,6 +3,7 @@ package com.mlinde.marvelcomicsapp.di
 import android.util.Log
 import com.mlinde.marvelcomicsapp.api.ApiService
 import com.mlinde.marvelcomicsapp.data.ComicsRepository
+import com.mlinde.marvelcomicsapp.data.RepositoryInterface
 import com.mlinde.marvelcomicsapp.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -70,5 +71,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesRepository(apiService: ApiService) = ComicsRepository(apiService)
+    fun providesRepository(apiService: ApiService): RepositoryInterface = ComicsRepository(apiService)
 }
