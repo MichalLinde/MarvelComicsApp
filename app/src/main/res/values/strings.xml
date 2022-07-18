@@ -12,4 +12,6 @@
     <string name="comics_list_label">Marvel Comics</string>
     <string name="search_fragment_label"> </string>
     <string name="details_fragment_label">Details</string>
+    <string name="no_author">Sorry, no description was given :(</string>
+    <string name="no_description">Sorry, no description was given :(</string>
 </resources>
