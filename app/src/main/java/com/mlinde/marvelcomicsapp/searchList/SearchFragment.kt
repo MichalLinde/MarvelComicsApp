@@ -83,12 +83,6 @@ class SearchFragment : Fragment() {
 
     private fun setUpObserver(){
         viewModel.comicsLiveData.observe(viewLifecycleOwner){
-//            if (it is ApiResponse.Success){
-//                it.data?.let { it1 -> setUpAdapter(it1) }
-//            }
-//            else if (it is ApiResponse.Error){
-//                Log.e("Error", "setUpObserver: ", it.message)
-//            }
             it?.let {
                 setUpAdapter(it)
             }
